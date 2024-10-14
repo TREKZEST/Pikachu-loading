@@ -1,120 +1,81 @@
-<!DOCTYPE html>
 <html>
 <head>
 <style>
-:root {
---bg: #b6d887;
---green: #009400;
---red: #e70001;
---seeds: #4f2500;
+* {
+cursor: none
 }
 body {
-background-color: var(--bg);
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
 }
-.watermelon {
+.loading {
+background-color: #ffffff;
+display: fixed
+}
+.loading img {
+display: block;
+min-width: 200px;
+min-height: 209px;
+}
+.mouse {
+height: 25px;
+width: 25px;
+border-radius: 100%;
+background-color: #fff782;
 position: absolute;
-width: 500px;
-height: 500px;
-top: 0;
-right: 0;
-bottom: 0;
+animation: mouseAnimation .5s infinite ease-in-out alternate;
 left: 0;
-margin: auto;
+top: 0
 }
-.slice-a {
-position: absolute;
-width: 200px;
-height: 100px;
-top: 40%;
-left: 30%;
-border-radius: 50%;
-transform: rotate(45deg);
-background-color: var(--red);
-}
-.slice-a:after {
-content: "";
-position: absolute;
-height: 100%;
-width: 100%;
-top: -15%;
-border-bottom: 60px solid var(--green);
-border-bottom-right-radius: 100px;
-border-bottom-left-radius: 100px;
-}
-.seed-a, .seed-b, .seed-c, .seed-d, .seed-e {
-height: 10px;
-width: 10px;
-border-bottom-right-radius: 100px;
-border-top-left-radius: 100px;
-background-color: var(--seeds);
-}
-.seed-a {
-position: absolute;
-top: 40%;
-left: 45%;
-}
-.seed-b {
-position: absolute;
-top: 40%;
-left: 50%;
-}
-.seed-c {
-position: absolute;
-top: 45%;
-left: 45%;
-}
-.seed-d {
-position: absolute;
-top: 35%;
-left: 40%;
-}
-.seed-e {
-position: absolute;
-top: 45%;
-left: 40%;
-}
-.slice-b {
-position: absolute;
-height: 100px;
-width: 200px;
-top: 40%;
-left: 30%;
-border-radius: 50%;
-transform: rotate(-130deg);
-background-color: var(--green);
-animation: slice 5s ease-in-out infinite;
-}
-.slice-b:after {
-content: "";
-position: absolute;
-height: 100%;
-width: 100%;
-top: -15%;
-border-bottom: 60px solid var(--green);
-border-bottom-right-radius: 100px;
-border-bottom-left-radius: 100px;
-}
-@keyframes slice {
+@keyframes mouseAnimation {
 from {
-top: 40%;
-left: 30%;
+width: 25px;
+height: 25px
 }
 to {
-top: 50%;
-left: 45%;
+width: 15px;
+height: 15px
 }
 }
 </style>
 </head>
 <body>
-<div class="watermelon">
-<div class="slice-a"></div>
-<div class="seed-a"></div>
-<div class="seed-b"></div>
-<div class="seed-c"></div>
-<div class="seed-d"></div>
-<div class="seed-e"></div>
-<div class="slice-b"></div>
+<div class="loading">
+<img src="http://a.top4top.net/p_1990j031.gif" alt="Loading">
 </div>
+<div class="mouse original"></div>
+<script>
+$(".loading").height($(window).height());
+$(".loading").width($(window).width());
+$(".loading img").css({
+paddingTop: ($(".loading").height() - $(".loading img").height()) / 2,
+paddingLeft: ($(".loading").width() - $(".loading img").width()) / 2
+});
+$(window).resize(function () {
+"use strict";
+$(".loading").height($(window).height());
+$(".loading").width($(window).width());
+$(".loading img").css({
+paddingTop: ($(".loading").height() - $(".loading img").height()) / 2,
+paddingLeft: ($(".loading").width() - $(".loading img").width()) / 2
+});
+});
+$(window).mousemove(function (e) {
+"use strict";
+$(".original").css({
+left: e.pageX - 16,
+top: e.pageY - 16
+});
+});
+$("body").on("click", function (e) {
+"use strict";
+$(".original").clone(true).appendTo("body").css({
+left: e.pageX - 16,
+top: e.pageY - 16
+}).removeClass("original");
+});
+</script>
 </body>
 </html>
